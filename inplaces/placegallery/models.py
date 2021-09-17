@@ -28,8 +28,8 @@ class InterestingPlace(models.Model):
 
 def create_image_path(instance, filename):
     return os.path.join(
-        instance.interesting_place.city.city_name,
-        instance.interesting_place.interesting_place_name,
+        instance.interesting_place.city.slug,
+        instance.interesting_place.slug,
         filename
     )
 
