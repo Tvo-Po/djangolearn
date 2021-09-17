@@ -4,16 +4,18 @@ from django.db import models
 
 
 class City(models.Model):
-    city_name = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50)
+    city_name_ru = models.CharField(max_length=50)
     population = models.IntegerField()
     area = models.FloatField()
 
     def __str__(self):
-        return self.city_name
+        return self.city_name_ru
 
 
 class InterestingPlace(models.Model):
-    interesting_place_name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
+    interesting_place_name_ru = models.CharField(max_length=200)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     street_name = models.CharField(max_length=100)
     house_number = models.CharField(max_length=10, blank=True)
@@ -21,7 +23,7 @@ class InterestingPlace(models.Model):
     cord_y = models.FloatField()
 
     def __str__(self):
-        return self.interesting_place_name
+        return self.interesting_place_name_ru
 
 
 def create_image_path(instance, filename):
