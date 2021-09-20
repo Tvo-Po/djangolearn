@@ -5,8 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-  <h1>{{city.city_name_ru}}</h1>
-        <ul>{{city.population}}</ul>
-        <ul>{{city.area}}</ul>
+  <h1>{{ city.city_name_ru }}</h1>
+        <ul>{{ city.population }}</ul>
+        <ul>{{ city.area }}</ul>
+    {% for place in city.get_place_queryset %}
+  <div><a href="{% url 'placegallery:place' city_name=city.slug slug=place.slug%}">{{ place.interesting_place_name_ru }}</a></div>
+    {% endfor %}
 </body>
 </html>

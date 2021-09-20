@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 
-from .models import City
+from .models import City, InterestingPlace
 
 
 class IndexView(generic.ListView):
@@ -15,3 +15,8 @@ class IndexView(generic.ListView):
 class CityView(generic.DetailView):
     model = City
     template_name = 'placegallery/city.html'
+
+
+class InterestingPlaceView(generic.DetailView):
+    model = InterestingPlace
+    template_name = 'placegallery/place.html'
