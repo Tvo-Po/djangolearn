@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>{{interestingplace.interesting_place_name_ru}}</h2>
+    <ul>
+        <li>{{interestingplace.city.city_name_ru}}</li>
+        {% if interestingplace.street_name %}
+        <li>
+            {{interestingplace.street_name}}
+            {% if interestingplace.house_number %}
+                , {{interestingplace.house_number}}
+            {% endif %}
+        </li>
+        {% endif %}
+    </ul>
+    {% for image in interestingplace.placeimage_set.all %}
+        <img src="{% static image.get_relative_path %}">
+    {% endfor %}
+</body>
+</html>

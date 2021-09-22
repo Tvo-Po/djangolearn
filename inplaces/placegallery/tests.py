@@ -18,7 +18,7 @@ class PlaceImageModelTests(TestCase):
             city = city_names[i]
             place = place_names[i]
             image = image_names[i]
-            test_city = City(city_name=city)
-            test_place = InterestingPlace(interesting_place_name=place, city=test_city)
+            test_city = City(slug=city)
+            test_place = InterestingPlace(slug=place, city=test_city)
             test_image = PlaceImage(image=origin_picture_location, interesting_place=test_place)
             self.assertEqual(create_image_path(test_image, image), city + '\\' + place + '\\' + image)
