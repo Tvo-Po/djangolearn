@@ -31,6 +31,9 @@ class InterestingPlace(models.Model):
 
 def create_image_path(instance, filename):
     return os.path.join(
+        'placegallery',
+        'static',
+        'place_images',
         instance.interesting_place.city.slug,
         instance.interesting_place.slug,
         filename
@@ -40,3 +43,7 @@ def create_image_path(instance, filename):
 class PlaceImage(models.Model):
     image = models.ImageField(upload_to=create_image_path)
     interesting_place = models.ForeignKey(InterestingPlace, on_delete=models.CASCADE)
+
+    def get_relative_path(self):
+        path = self.image.path
+        return path[path.find('place_images'):]

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,5 +19,8 @@
         </li>
         {% endif %}
     </ul>
+    {% for image in interestingplace.placeimage_set.all %}
+        <img src="{% static image.get_relative_path %}">
+    {% endfor %}
 </body>
 </html>
