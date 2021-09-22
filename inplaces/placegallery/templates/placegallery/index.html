@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div>
+    {% for city in alphabetical_order_city_list %}
+      <li><a href="{% url 'placegallery:city' city.slug%}">{{city.city_name_ru}}</a></li>
+    {% endfor %}
+  </div>
+</body>
+</html>
