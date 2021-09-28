@@ -3,11 +3,31 @@ import os
 from django.db import models
 
 
+class Region(models.Model):
+    region_name_ru = models.CharField(max_length=50, verbose_name='russian name')
+    population = models.IntegerField(blank=True, null=True)
+    area = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return self.region_name_ru
+
+    def save(self, *args, **kwargs):
+        if not self.population:
+            self.population = None
+        if not self.area:
+            self.area = None
+        super(Region, self).save(*args, **kwargs)
+
+
 class City(models.Model):
-    slug = models.CharField(max_length=50)
-    city_name_ru = models.CharField(max_length=50)
-    population = models.IntegerField()
-    area = models.FloatField()
+    slug = models.CharField(max_length=50, verbose_name='english name for URL')
+    city_name_ru = models.CharField(max_length=50, verbose_name='russian name')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    population = models.IntegerField(blank=True, null=True)
+    area = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'cities'
 
     def __str__(self):
         return self.city_name_ru
@@ -15,15 +35,22 @@ class City(models.Model):
     def get_place_queryset(self):
         return self.places.all()
 
+    def save(self, *args, **kwargs):
+        if not self.population:
+            self.population = None
+        if not self.area:
+            self.area = None
+        super(City, self).save(*args, **kwargs)
+
 
 class InterestingPlace(models.Model):
-    slug = models.CharField(max_length=200)
-    interesting_place_name_ru = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200, verbose_name='english name for URL')
+    interesting_place_name_ru = models.CharField(max_length=200, verbose_name='russian name')
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='places')
     street_name = models.CharField(max_length=100, blank=True)
     house_number = models.CharField(max_length=10, blank=True)
-    cord_x = models.FloatField()
-    cord_y = models.FloatField()
+    cord_x = models.FloatField(verbose_name='X coordinate')
+    cord_y = models.FloatField(verbose_name='Y coordinate')
 
     def __str__(self):
         return self.interesting_place_name_ru
