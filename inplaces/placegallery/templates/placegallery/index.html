@@ -6,6 +6,8 @@
 </head>
 <body>
   <div>
+      <li><a href="{% url 'placegallery:city' Moscow.slug%}">{{Moscow.city_name_ru}}</a></li>
+      <li><a href="{% url 'placegallery:city' SPb.slug%}">{{SPb.city_name_ru}}</a></li>
     {% for city in alphabetical_order_city_list %}
       {% ifchanged city.region %}
         <h3>{{ city.region.region_name_ru }}</h3>
