@@ -10,7 +10,7 @@ class IndexView(generic.ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        return City.objects.order_by('city_name_ru')[:]
+        return City.objects.order_by('region__region_name_ru')[:]
 
 
 class CityView(generic.DetailView):

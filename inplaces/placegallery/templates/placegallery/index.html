@@ -7,6 +7,9 @@
 <body>
   <div>
     {% for city in alphabetical_order_city_list %}
+      {% ifchanged city.region %}
+        <h3>{{ city.region.region_name_ru }}</h3>
+      {% endifchanged %}
       <li><a href="{% url 'placegallery:city' city.slug%}">{{city.city_name_ru}}</a></li>
     {% endfor %}
   </div>
