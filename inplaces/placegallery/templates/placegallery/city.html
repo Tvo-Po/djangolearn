@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base_temp.html" %}
+
+{% block content %}
   <h1>{{ city.city_name_ru }}</h1>
         <ul>{{ city.population }}</ul>
         <ul>{{ city.area }}</ul>
     {% for place in city.get_place_queryset %}
   <div><a href="{% url 'placegallery:place' city_name=city.slug slug=place.slug%}">{{ place.interesting_place_name_ru }}</a></div>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

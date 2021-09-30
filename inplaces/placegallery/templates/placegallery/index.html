@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base_temp.html" %}
+
+{% block content %}
   <div>
       <li><a href="{% url 'placegallery:city' Moscow.slug%}">{{Moscow.city_name_ru}}</a></li>
       <li><a href="{% url 'placegallery:city' SPb.slug%}">{{SPb.city_name_ru}}</a></li>
@@ -31,5 +27,4 @@
           {% endif %}
       </span>
   </div>
-</body>
-</html>
+{% endblock %}
