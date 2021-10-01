@@ -51,6 +51,7 @@ class InterestingPlace(models.Model):
     house_number = models.CharField(max_length=10, blank=True)
     cord_x = models.FloatField(verbose_name='X coordinate')
     cord_y = models.FloatField(verbose_name='Y coordinate')
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.interesting_place_name_ru
