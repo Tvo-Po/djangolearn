@@ -1,5 +1,7 @@
 {% extends "base_temp.html" %}
 
+{% block title %} <title>inPlaces — {{ city.slug }}</title> {% endblock %}
+
 {% block content %}
   <h1>{{ city.city_name_ru }}</h1>
         <ul>{{ city.population }}</ul>

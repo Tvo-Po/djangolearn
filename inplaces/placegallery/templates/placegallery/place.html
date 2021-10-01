@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block title %} <title>inPlaces — {{ interestingplace.slug }}</title> {% endblock %}
+
 {% block content %}
     <h2>{{interestingplace.interesting_place_name_ru}}</h2>
     <ul>

@@ -1,30 +1,48 @@
 {% extends "base_temp.html" %}
 
-{% block content %}
-  <div>
-      <li><a href="{% url 'placegallery:city' Moscow.slug%}">{{Moscow.city_name_ru}}</a></li>
-      <li><a href="{% url 'placegallery:city' SPb.slug%}">{{SPb.city_name_ru}}</a></li>
-    {% for city in alphabetical_order_city_list %}
-      {% ifchanged city.region %}
-        <h3>{{ city.region.region_name_ru }}</h3>
-      {% endifchanged %}
-      <li><a href="{% url 'placegallery:city' city.slug%}">{{city.city_name_ru}}</a></li>
-    {% endfor %}
-  </div>
-  <div class="pagination">
-      <span class="step-links">
-          {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-          {% endif %}
-          <span class="current">
-              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-          </span>
+{% load extra_template_filters %}
 
-          {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-          {% endif %}
-      </span>
+{% block title %} <title>inPlaces — Main</title> {% endblock %}
+
+{% block content %}
+  <div class="container-xl" style="padding: 0 100px 0 100px">
+      <a class="link-info" style="padding-left:20px" href="{% url 'placegallery:city' Moscow.slug%}">{{Moscow.city_name_ru}}</a><br>
+      <a class="link-info" style="padding-left:20px" href="{% url 'placegallery:city' SPb.slug%}">{{SPb.city_name_ru}}</a>
+
+      <div class="row justify-content-center">
+          <div class="col">
+          {% for ind in city_list|half_list_range:True %}
+            {% ifchanged city_list|get_region:ind %}
+                <h3>{{ city_list|get_region:ind }}</h3>
+            {% endifchanged %}
+            <a class="{{ city_list|has_places:ind }}" style="padding-left:20px" href="{% url 'placegallery:city' city_list|get_slug:ind %}">{{city_list|get_city_name_ru:ind}}</a><br>
+          {% endfor %}
+          </div>
+
+          <div class="col">
+              {% for ind in city_list|half_list_range:False %}
+            {% ifchanged city_list|get_region:ind %}
+                <h3>{{ city_list|get_region:ind }}</h3>
+            {% endifchanged %}
+             <a class="{{ city_list|has_places:ind }}" style="padding-left:20px" href="{% url 'placegallery:city' city_list|get_slug:ind %}">{{city_list|get_city_name_ru:ind}}</a><br>
+          {% endfor %}
+          </div>
+      </div>
+      <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+
+              {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
   </div>
 {% endblock %}
