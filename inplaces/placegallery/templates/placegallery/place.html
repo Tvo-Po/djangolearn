@@ -5,19 +5,37 @@
 {% block title %} <title>inPlaces — {{ interestingplace.slug }}</title> {% endblock %}
 
 {% block content %}
-    <h2>{{interestingplace.interesting_place_name_ru}}</h2>
-    <ul>
-        <li>{{interestingplace.city.city_name_ru}}</li>
-        {% if interestingplace.street_name %}
-        <li>
-            {{interestingplace.street_name}}
-            {% if interestingplace.house_number %}
-                , {{interestingplace.house_number}}
-            {% endif %}
-        </li>
-        {% endif %}
-    </ul>
-    {% for image in interestingplace.placeimage_set.all %}
-        <img src="{% static image.get_relative_path %}">
-    {% endfor %}
+    <div class="container-xl inner-cont">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <h2 class="ct-nm-cntr">{{interestingplace.interesting_place_name_ru}}</h2>
+
+                {% if interestingplace.placeimage_set.all %}
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                      <div class="carousel-inner overflow-hidden">
+
+                      {% for image in interestingplace.placeimage_set.all %}
+                            <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %} overflow-hidden">
+                              <img src="{% static image.get_relative_path %}" class="d-block w-100 rounded fix-h" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                              </div>
+                            </div>
+                      {% endfor %}
+
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                {% endif %}
+
+              <!-- info -->
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

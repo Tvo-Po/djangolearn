@@ -14,3 +14,11 @@
 .pg-cntr {
     justify-content: center;
 }
+
+.ct-nm-cntr {
+    text-align: center;
+}
+
+.fix-h {
+    max-height: 400px;
+}
