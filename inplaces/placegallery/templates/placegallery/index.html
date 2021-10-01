@@ -5,9 +5,10 @@
 {% block title %} <title>inPlaces — Main</title> {% endblock %}
 
 {% block content %}
-  <div class="container-xl" style="padding: 0 100px 0 100px">
-      <a class="link-info" style="padding-left:20px" href="{% url 'placegallery:city' Moscow.slug%}">{{Moscow.city_name_ru}}</a><br>
-      <a class="link-info" style="padding-left:20px" href="{% url 'placegallery:city' SPb.slug%}">{{SPb.city_name_ru}}</a>
+  <div class="container-xl inner-cont">
+
+      <a class="link-info city-link" href="{% url 'placegallery:city' Moscow.slug%}">{{Moscow.city_name_ru}}</a><br>
+      <a class="link-info city-link" href="{% url 'placegallery:city' SPb.slug%}">{{SPb.city_name_ru}}</a>
 
       <div class="row justify-content-center">
           <div class="col">
@@ -15,7 +16,7 @@
             {% ifchanged city_list|get_region:ind %}
                 <h3>{{ city_list|get_region:ind }}</h3>
             {% endifchanged %}
-            <a class="{{ city_list|has_places:ind }}" style="padding-left:20px" href="{% url 'placegallery:city' city_list|get_slug:ind %}">{{city_list|get_city_name_ru:ind}}</a><br>
+            <a class="{{ city_list|has_places:ind }} city-link" href="{% url 'placegallery:city' city_list|get_slug:ind %}">{{city_list|get_city_name_ru:ind}}</a><br>
           {% endfor %}
           </div>
 
@@ -24,25 +25,55 @@
             {% ifchanged city_list|get_region:ind %}
                 <h3>{{ city_list|get_region:ind }}</h3>
             {% endifchanged %}
-             <a class="{{ city_list|has_places:ind }}" style="padding-left:20px" href="{% url 'placegallery:city' city_list|get_slug:ind %}">{{city_list|get_city_name_ru:ind}}</a><br>
+             <a class="{{ city_list|has_places:ind }} city-link" href="{% url 'placegallery:city' city_list|get_slug:ind %}">{{city_list|get_city_name_ru:ind}}</a><br>
           {% endfor %}
           </div>
       </div>
-      <div class="pagination">
-          <span class="step-links">
-              {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-              {% endif %}
-              <span class="current">
-                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-              </span>
 
-              {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-              {% endif %}
-          </span>
+      <div class="row justify-content-center mt-4">
+          <nav aria-label="...">
+              <ul class="pagination pagination-sm pg-cntr">
+
+                  {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                  {% else %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">1</span>
+                    </li>
+                  {% endif %}
+
+                  {% if page_obj.number > 2 %}
+                    {% if page_obj.number > 3 %}
+                        <li class="page-item" aria-current="page">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{page_obj.previous_page_number}}</a></li>
+                  {% endif %}
+
+                  {% if page_obj.number != 1 %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{page_obj.number}}</span>
+                    </li>
+                  {% endif %}
+
+                  {% if page_obj.number <= page_obj.paginator.num_pages|add:"-1" %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{page_obj.next_page_number}}</a></li>
+                  {% endif %}
+
+                  {% if page_obj.number <= page_obj.paginator.num_pages|add:"-3" %}
+                    <li class="page-item" aria-current="page">
+                        <span class="page-link">...</span>
+                    </li>
+                  {% endif %}
+
+                  {% if page_obj.number <= page_obj.paginator.num_pages|add:"-2" %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{page_obj.paginator.num_pages}}</a></li>
+                  {% endif %}
+
+              </ul>
+          </nav>
       </div>
+
   </div>
 {% endblock %}
