@@ -21,4 +21,5 @@ class PlaceImageModelTests(TestCase):
             test_city = City(slug=city)
             test_place = InterestingPlace(slug=place, city=test_city)
             test_image = PlaceImage(image=origin_picture_location, interesting_place=test_place)
-            self.assertEqual(create_image_path(test_image, image), city + '\\' + place + '\\' + image)
+            self.assertEqual(create_image_path(test_image, image),
+                             'placegallery\\static\\place_images\\' + city + '\\' + place + '\\' + image)

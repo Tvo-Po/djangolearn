@@ -1,0 +1,28 @@
+.nb-mr {
+    margin-right: 0.6rem;
+}
+
+.inner-cont {
+    padding: 0 100px 0 100px;
+}
+
+.city-link {
+    padding-left:20px;
+    text-decoration: none;
+}
+
+.pg-cntr {
+    justify-content: center;
+}
+
+.ct-nm-cntr {
+    text-align: center;
+}
+
+.fix-h {
+    max-height: 400px;
+}
+
+.text-justify {
+    text-align: justify!important;
+}
