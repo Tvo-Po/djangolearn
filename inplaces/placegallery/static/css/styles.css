@@ -22,3 +22,7 @@
 .fix-h {
     max-height: 400px;
 }
+
+.text-justify {
+    text-align: justify!important;
+}

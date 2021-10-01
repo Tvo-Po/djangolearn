@@ -34,7 +34,7 @@ class InterestingPlaceAdmin(admin.ModelAdmin):
     fieldsets = (
         (None,
          {
-             'fields': (('slug', 'interesting_place_name_ru'),)
+             'fields': (('slug', 'interesting_place_name_ru'), 'description')
          }),
         ('Place Address',
          {

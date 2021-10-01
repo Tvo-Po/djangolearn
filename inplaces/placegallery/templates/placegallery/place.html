@@ -31,11 +31,25 @@
                         <span class="visually-hidden">Next</span>
                       </button>
                     </div>
+                 </div>
+                {% else %}
+                <img src="{% static 'site_images/empty_images.png' %}" class="d-block w-100 rounded fix-h" alt="...">
                 {% endif %}
-
-              <!-- info -->
-
             </div>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-6">
+                    {% if interestingplace.description %}
+                        <p class="text-justify">{{ interestingplace.description }}</p>
+                    {% else %}
+                        <p class="text-justify">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a ligula blandit ex luctus volutpat. Quisque condimentum posuere felis a imperdiet. In eget efficitur orci. Nulla semper luctus eros, et accumsan odio rhoncus vel. Proin quis nibh non lorem consectetur molestie a id diam. Quisque sagittis semper tellus sit amet molestie. Nulla facilisi. Curabitur efficitur, quam ut placerat faucibus, turpis lectus ultricies ante, eu laoreet urna ligula venenatis felis.
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+
+
         </div>
     </div>
 {% endblock %}

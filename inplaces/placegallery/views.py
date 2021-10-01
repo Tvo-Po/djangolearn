@@ -7,7 +7,7 @@ from .models import City, InterestingPlace
 class IndexView(generic.ListView):
     template_name = 'placegallery/index.html'
     context_object_name = 'city_list'
-    paginate_by = 4
+    paginate_by = 26
 
     def get_queryset(self):
         return City.objects.order_by('region__region_name_ru')[2:]
