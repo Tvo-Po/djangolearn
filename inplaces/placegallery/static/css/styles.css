@@ -26,3 +26,20 @@
 .text-justify {
     text-align: justify!important;
 }
+
+.modal-cm {
+    max-width: 270px;
+}
+
+.col-cstm {
+    width: 35%;
+}
+
+.col-cst {
+    width: 75%;
+}
+
+.alrt-cstm {
+    margin-left: 10%;
+    width: 75%;
+}
