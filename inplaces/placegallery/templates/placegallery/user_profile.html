@@ -1,0 +1,48 @@
+{% extends "base_temp.html" %}
+
+{% load static %}
+
+{% block title %} <title>inPlaces — {{ user.username }}</title> {% endblock %}
+
+{% block content %}
+<div class="container-xl inner-cont">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <div>Имя пользователя: {{user.username}}</div>
+            <form action="{% url 'placegallery:profile' %}" method="post">
+                <div class="btn-group" role="group" aria-label="Basic-example">
+                    {% csrf_token %}
+                    {{base_form.username}}
+                    <button type="submit" class="btn btn-primary">Изменить</button>
+                </div>
+            </form>
+            <div style="margin-top:10px">Пароль:</div>
+            <form action="{% url 'placegallery:profile' %}" method="post">
+                <div class="btn-group" role="group" aria-label="Basic-example">
+                    {% csrf_token %}
+                    {{base_form.password}}
+                    <button type="submit" class="btn btn-primary">Изменить</button>
+                </div>
+            </form>
+            <div style="margin-top:15px" class="row">
+                <div class="col-3">
+                    <img src="{% static user_pic %}" class="profile-pic">
+                </div>
+                <div class="col-4 outer">
+                    <form class="inner" style="margin-lef" action="{% url 'placegallery:profile' %}" method="post" enctype="multipart/form-data">
+                        <div class="btn-group" role="group" aria-label="Basic-example">
+                            <label for="id_img_profile" class="custom-file-upload">
+                                Выбрать
+                            </label>
+                            {% csrf_token %}
+                            {{additional_form.img_profile}}
+                            <button type="submit" class="btn btn-primary">Изменить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{test}}
+{% endblock %}

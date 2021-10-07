@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Region(models.Model):
@@ -68,6 +69,16 @@ def create_image_path(instance, filename):
     )
 
 
+def create_image_path_for_user(instance, filename):
+    return os.path.join(
+        'placegallery',
+        'static',
+        'user_profile_image',
+        instance.user.username,
+        filename
+    )
+
+
 class PlaceImage(models.Model):
     image = models.ImageField(upload_to=create_image_path)
     interesting_place = models.ForeignKey(InterestingPlace, on_delete=models.CASCADE)
@@ -75,3 +86,12 @@ class PlaceImage(models.Model):
     def get_relative_path(self):
         path = self.image.path
         return path[path.find('place_images'):]
+
+
+class UserProfile(models.Model):
+    img_profile = models.ImageField(upload_to=create_image_path_for_user)
+    user = models.OneToOneField(User, models.CASCADE)
+
+    def get_relative_path(self):
+        path = self.img_profile.path
+        return path[path.find('user_profile_image'):]

@@ -43,3 +43,33 @@
     margin-left: 10%;
     width: 75%;
 }
+
+.profile-pic {
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  padding: 4px;
+  width: 70px;
+  margin-right: 10px
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    border-radius: 2em 0 0 2em;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.outer {
+    position: relative;
+}
+
+.inner {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

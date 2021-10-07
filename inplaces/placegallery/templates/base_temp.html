@@ -42,6 +42,7 @@
                       <button class="btn btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#ModalRegister">Зарегистрироваться</button>
                   </form>
                   {% else %}
+                    <a href="{% url 'placegallery:profile' %}" class="nav-link active">Профиль</a>
                     <form class="d-flex" action="{% url 'placegallery:logout' %}" method="get">
                       <button class="btn btn-outline-success me-2" type="submit">Выйти</button>
                     </form>

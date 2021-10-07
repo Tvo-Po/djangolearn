@@ -1,19 +1,19 @@
 from django import forms
 from django.contrib.auth.models import User
 
+from .models import UserProfile
 
-class UserLogin(forms.ModelForm):
-    nickname = forms.CharField(max_length=30)
-    password = forms.CharField(widget=forms.PasswordInput(), max_length=50)
 
+class UserBaseSettings(forms.ModelForm):
     class Meta:
         model = User
+        fields = ['username', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
 
-class UserRegister(forms.ModelForm):
-    nickname = forms.CharField(max_length=30)
-    password = forms.CharField(widget=forms.PasswordInput(), max_length=50)
-    password_repeat = forms.CharField(widget=forms.PasswordInput(), max_length=50)
-
+class UserAdditionalSettings(forms.ModelForm):
     class Meta:
-        model = User
+        model = UserProfile
+        fields = ['img_profile']
