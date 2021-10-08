@@ -50,9 +50,10 @@ class InterestingPlace(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='places')
     street_name = models.CharField(max_length=100, blank=True)
     house_number = models.CharField(max_length=10, blank=True)
-    cord_x = models.FloatField(verbose_name='X coordinate')
-    cord_y = models.FloatField(verbose_name='Y coordinate')
+    cord_x = models.FloatField(verbose_name='X coordinate', blank=True, null=True)
+    cord_y = models.FloatField(verbose_name='Y coordinate', blank=True, null=True)
     description = models.TextField(blank=True)
+    is_checked = models.BooleanField(default=True)
 
     def __str__(self):
         return self.interesting_place_name_ru

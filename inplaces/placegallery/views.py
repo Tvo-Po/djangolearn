@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from .models import City, InterestingPlace, UserProfile, Comment
-from .forms import UserBaseSettings, UserAdditionalSettings, UserComment
+from .forms import UserBaseSettings, UserAdditionalSettings, UserComment, PlaceForCheck, PlaceImageForCheck
 
 
 class IndexView(generic.ListView):
@@ -148,3 +148,23 @@ class ProfileView(generic.View):
                 profile.save()
         context = self._inner_context_make(request)
         return render(request, 'placegallery/user_profile.html', context)
+
+
+class NewPlaceView(generic.View):
+    def get(self, request):
+        form = PlaceForCheck()
+        context = {'form': form}
+        return render(request, 'placegallery/add_place.html', context)
+
+    def post(self, request):
+        form = PlaceForCheck()
+        context = {'form': form}
+        form = PlaceForCheck(request.POST)
+        if form.is_valid():
+            new_place = form.save(commit=False)
+            new_place.is_checked = False
+            new_place.save()
+        else:
+            context['error'] = 'Форма не верно заполнена.'
+        return render(request, 'placegallery/add_place.html', context)
+

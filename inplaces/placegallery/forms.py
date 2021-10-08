@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import UserProfile, Comment
+from .models import UserProfile, Comment, InterestingPlace
 
 
 class UserBaseSettings(forms.ModelForm):
@@ -24,5 +24,18 @@ class UserComment(forms.ModelForm):
         model = Comment
         fields = ['text']
         widgets = {
-            'text': forms.TextInput(attrs={'class': 'form-control'})
+            'text': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class PlaceForCheck(forms.ModelForm):
+    class Meta:
+        model = InterestingPlace
+        fields = ['interesting_place_name_ru', 'city', 'street_name', 'house_number', 'description']
+        widgets = {
+            'interesting_place_name_ru': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.Select(attrs={'class': 'form-control'}),
+            'street_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'house_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
         }

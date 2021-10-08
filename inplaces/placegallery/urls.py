@@ -12,6 +12,7 @@ urlpatterns = [
     path('register/', views.registration_system, name='register'),
     path('profile/', login_required(views.ProfileView.as_view(), login_url='placegallery:register'), name='profile'),
     path('comment/', login_required(views.CommentView.as_view(), login_url='placegallery:register'), name='comment'),
+    path('add_place', login_required(views.NewPlaceView.as_view()), name='add_place'),
     path('<slug:slug>/', views.CityView.as_view(), name='city'),
     path('<str:city_name>/<slug:slug>', views.InterestingPlaceView.as_view(), name='place'),
 ]

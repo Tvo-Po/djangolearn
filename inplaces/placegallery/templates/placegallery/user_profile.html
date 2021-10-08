@@ -4,23 +4,6 @@
 
 {% block title %} <title>inPlaces — {{ user.username }}</title> {% endblock %}
 
-{% block additional_styles %}
-textarea {
-  width: 130px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  padding: 12px 20px 12px 40px;
-  transition: width 0.4s ease-in-out;
-}
-
-textarea:focus {
-  width: 100%;
-}
-{% endblock %}
-
 {% block content %}
 <div class="container-xl inner-cont">
     <div class="row justify-content-center">

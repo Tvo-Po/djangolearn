@@ -52,10 +52,6 @@
   margin-right: 10px
 }
 
-input[type="file"] {
-    display: none;
-}
-
 .custom-file-upload {
     border: 1px solid #ccc;
     border-radius: 2em 0 0 2em;

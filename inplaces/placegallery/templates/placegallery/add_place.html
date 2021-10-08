@@ -1,0 +1,61 @@
+{% extends "base_temp.html" %}
+
+{% load static %}
+
+{% block title %} <title>inPlaces — New Place Form</title> {% endblock %}
+
+{% block content %}
+    <div class="container-xl inner-cont">
+        <div class="row justify-content-center">
+            <div class="col-7">
+
+                <h2 class="mb-4">Добавить место</h2>
+                {% if error %}
+                    <div class="alrt-cstm alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <form action="{% url 'placegallery:add_place' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3 row">
+                        <label for="id_interesting_place_name_ru" class="col-sm-2 col-form-label">Название</label>
+                        <div class="col-sm-10">
+                            {{ form.interesting_place_name_ru }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="id_city" class="col-sm-2 col-form-label">Город</label>
+                        <div class="col-sm-10">
+                            {{ form.city }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="id_street_name" class="col-sm-2 col-form-label">Улица</label>
+                        <div class="col-sm-10">
+                            {{ form.street_name }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="id_house_number" class="col-sm-2 col-form-label">Дом</label>
+                        <div class="col-sm-10">
+                            {{ form.house_number }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="id_description" class="col-sm-2 col-form-label">Описание</label>
+                        <div class="col-sm-10">
+                            {{ form.description }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button class="btn btn-primary" type="submit">Отправить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{{test}}
+
+{% endblock %}
