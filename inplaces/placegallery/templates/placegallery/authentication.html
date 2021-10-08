@@ -1,0 +1,9 @@
+{% extends "base_temp.html" %}
+
+{% block tittle %}<title>inPlaces — Authentication</title>{% endblock %}
+
+{% block content %}
+    <div class="alrt-cstm alert alert-{{ authentication_type }}" role="alert">
+        {{ authentication_text }}
+    </div>
+{% endblock %}

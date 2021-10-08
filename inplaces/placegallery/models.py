@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Region(models.Model):
@@ -49,9 +50,10 @@ class InterestingPlace(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='places')
     street_name = models.CharField(max_length=100, blank=True)
     house_number = models.CharField(max_length=10, blank=True)
-    cord_x = models.FloatField(verbose_name='X coordinate')
-    cord_y = models.FloatField(verbose_name='Y coordinate')
+    cord_x = models.FloatField(verbose_name='X coordinate', blank=True, null=True)
+    cord_y = models.FloatField(verbose_name='Y coordinate', blank=True, null=True)
     description = models.TextField(blank=True)
+    is_checked = models.BooleanField(default=True)
 
     def __str__(self):
         return self.interesting_place_name_ru
@@ -68,6 +70,16 @@ def create_image_path(instance, filename):
     )
 
 
+def create_image_path_for_user(instance, filename):
+    return os.path.join(
+        'placegallery',
+        'static',
+        'user_profile_image',
+        instance.user.username,
+        filename
+    )
+
+
 class PlaceImage(models.Model):
     image = models.ImageField(upload_to=create_image_path)
     interesting_place = models.ForeignKey(InterestingPlace, on_delete=models.CASCADE)
@@ -75,3 +87,19 @@ class PlaceImage(models.Model):
     def get_relative_path(self):
         path = self.image.path
         return path[path.find('place_images'):]
+
+
+class UserProfile(models.Model):
+    img_profile = models.ImageField(upload_to=create_image_path_for_user)
+    user = models.OneToOneField(User, models.CASCADE)
+
+    def get_relative_path(self):
+        path = self.img_profile.path
+        return path[path.find('user_profile_image'):]
+
+
+class Comment(models.Model):
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, models.CASCADE)
+    place = models.ForeignKey(InterestingPlace, models.CASCADE)

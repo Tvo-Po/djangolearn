@@ -49,6 +49,32 @@
                 </div>
             </div>
 
+            <div class="row justify-content-center mt-4">
+                <div class="col-6">
+                    <form action="{% url 'placegallery:comment' %}" method="post">
+                        {% csrf_token %}
+                        <div class="btn-group d-flex" role="group" aria-label="Basic example">
+                            {{comment_form.text}}
+                            <input type="submit" class="btn btn-primary" value="Написать">
+                        </div>
+                        <input type="hidden" name="place" value="{{ interestingplace.slug }}">
+                    </form>
+                    {% for comment in comments %}
+                        <div class="row mt-4">
+                            <div class="col-2 position-relative">
+                                <img src="{% static comment.author.userprofile.get_relative_path %}" class="profile-pic-nav" alt="">
+                                <span class="position-absolute badge bg-primary bg-right">
+                                    {{comment.author.username}}
+                                    <span class="visually-hidden">username</span>
+                                </span>
+                            </div>
+                            <div class="col-10 centered-comment">
+                                {{comment.text}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
         </div>
     </div>

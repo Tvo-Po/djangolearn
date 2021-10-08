@@ -26,3 +26,65 @@
 .text-justify {
     text-align: justify!important;
 }
+
+.modal-cm {
+    max-width: 270px;
+}
+
+.col-cstm {
+    width: 35%;
+}
+
+.col-cst {
+    width: 75%;
+}
+
+.alrt-cstm {
+    margin-left: 10%;
+    width: 75%;
+}
+
+.profile-pic-edit {
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  padding: 4px;
+  width: 70px;
+  margin-right: 10px
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    border-radius: 2em 0 0 2em;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.outer {
+    position: relative;
+}
+
+.inner {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.profile-pic-nav {
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  padding: 3px;
+  width: 45px;
+}
+
+.bg-right {
+   position: absolute;
+   right: 70%;
+   top: -15%;
+}
+
+.centered-comment {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
