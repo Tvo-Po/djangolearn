@@ -4,6 +4,23 @@
 
 {% block title %} <title>inPlaces — {{ user.username }}</title> {% endblock %}
 
+{% block additional_styles %}
+textarea {
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out;
+}
+
+textarea:focus {
+  width: 100%;
+}
+{% endblock %}
+
 {% block content %}
 <div class="container-xl inner-cont">
     <div class="row justify-content-center">
@@ -26,7 +43,7 @@
             </form>
             <div style="margin-top:15px" class="row">
                 <div class="col-3">
-                    <img src="{% static user_pic %}" class="profile-pic">
+                    <img src="{% static user_pic %}" class="profile-pic-edit">
                 </div>
                 <div class="col-4 outer">
                     <form class="inner" style="margin-lef" action="{% url 'placegallery:profile' %}" method="post" enctype="multipart/form-data">

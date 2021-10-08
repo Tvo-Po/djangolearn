@@ -95,3 +95,10 @@ class UserProfile(models.Model):
     def get_relative_path(self):
         path = self.img_profile.path
         return path[path.find('user_profile_image'):]
+
+
+class Comment(models.Model):
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, models.CASCADE)
+    place = models.ForeignKey(InterestingPlace, models.CASCADE)

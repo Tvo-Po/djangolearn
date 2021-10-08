@@ -3,8 +3,8 @@ from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from .models import City, InterestingPlace, UserProfile
-from .forms import UserBaseSettings, UserAdditionalSettings
+from .models import City, InterestingPlace, UserProfile, Comment
+from .forms import UserBaseSettings, UserAdditionalSettings, UserComment
 
 
 class IndexView(generic.ListView):
@@ -30,6 +30,26 @@ class CityView(generic.DetailView):
 class InterestingPlaceView(generic.DetailView):
     model = InterestingPlace
     template_name = 'placegallery/place.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(InterestingPlaceView, self).get_context_data(**kwargs)
+        place = context['interestingplace']
+        context['comments'] = Comment.objects.filter(place=place).order_by('date')
+        context['comment_form'] = UserComment()
+        return context
+
+
+class CommentView(generic.View):
+
+    def post(self, request):
+        form = UserComment(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            place = InterestingPlace.objects.get(slug=request.POST['place'])
+            comment.place = place
+            comment.save()
+            return redirect('placegallery:place', city_name=place.city.slug, slug=place.slug)
 
 
 def login_system(request):
