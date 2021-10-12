@@ -17,6 +17,9 @@ class UserAdditionalSettings(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['img_profile']
+        widgets = {
+            'img_profile': forms.ClearableFileInput(attrs={'style': 'visibility: hidden; display: none'}),
+        }
 
 
 class UserComment(forms.ModelForm):

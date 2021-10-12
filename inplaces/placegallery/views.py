@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from .models import City, InterestingPlace, UserProfile, Comment
-from .forms import UserBaseSettings, UserAdditionalSettings, UserComment, PlaceForCheck, PlaceImageForCheck
+from .forms import UserBaseSettings, UserAdditionalSettings, UserComment, PlaceForCheck
 
 
 class IndexView(generic.ListView):
@@ -34,7 +34,7 @@ class InterestingPlaceView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(InterestingPlaceView, self).get_context_data(**kwargs)
         place = context['interestingplace']
-        context['comments'] = Comment.objects.filter(place=place).order_by('date')
+        context['comments'] = Comment.objects.filter(place=place).order_by('-date')
         context['comment_form'] = UserComment()
         return context
 
